@@ -28,8 +28,6 @@ class ItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<ItemCard> {
-  bool isLoading = true;
-
   @override
   Widget build(BuildContext context) {
     final concessData = Provider.of<Concess>(context);
@@ -78,7 +76,6 @@ class _ItemCardState extends State<ItemCard> {
 
   Future<void> navigateToEdit(String itemCode, String description, String price,
       Concess concessData) async {
-    // print("$itemCode, $description, $price");
     await showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -94,17 +91,14 @@ class _ItemCardState extends State<ItemCard> {
         );
       },
     );
-    setState(() {
-      isLoading = true;
-    });
+    showMyDialog("Item price updated");
   }
 
   void deleteByID(String itemCode, String description, String price,
       Concess concessData) async {
-    print("$itemCode $description $price");
     final url =
         '${link_header}state=conces_Delete&category_cd=${concessData.items.first.categoryCode}&subcat_cd=${concessData.items.first.subCatCode}&class_cd=${concessData.items.first.classCode}&subclass_cd=${concessData.items.first.subClassCode}&description=$description&retail_price=$price&location_code=${concessData.items.first.locationCode}&item_code=$itemCode';
-    print(url);
+
     HttpOverrides.global = MyHttpOverrides();
     final uri = Uri.parse(url);
     final response = await http.get(uri);
@@ -112,11 +106,31 @@ class _ItemCardState extends State<ItemCard> {
     final json = jsonDecode(utf);
     final result = json['status'];
 
-    print(result);
-
     final itemData = Provider.of<Items>(context, listen: false);
     if (result == 'ok') {
       itemData.delete(itemCode);
     } else {}
+
+    showMyDialog("Item deleted");
+  }
+
+  Future<void> showMyDialog(String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

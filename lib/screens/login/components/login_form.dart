@@ -120,7 +120,6 @@ class _LogInFormState extends State<LogInForm> {
   ) async {
     if (userName.isNotEmpty && password.isNotEmpty) {
       final itemData = Provider.of<Items>(context, listen: false);
-      print('Fetch');
       final url =
           '${link_header}state=conces_login&username=$userName&password=$password';
 
@@ -130,9 +129,6 @@ class _LogInFormState extends State<LogInForm> {
       final utf = utf8.decode(response.bodyBytes);
       final json = jsonDecode(utf);
       final result = json;
-
-      print(result['status']);
-      print(url);
 
       if (result['status'] == 'ok') {
         final url =

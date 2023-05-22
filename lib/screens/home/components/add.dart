@@ -148,15 +148,13 @@ class _AddItemState extends State<AddItem> {
     final itemData = Provider.of<Items>(context, listen: false);
     final url =
         '${link_header}state=conces_Create&category_cd=${widget.categoryCode}&subcat_cd=${widget.subCatCode}&class_cd=${widget.classCode}&subclass_cd=${widget.subClassCode}&description=$description&retail_price=$price&location_code=${widget.locationCode}';
-    print(url);
+
     HttpOverrides.global = MyHttpOverrides();
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final utf = utf8.decode(response.bodyBytes);
     final json = jsonDecode(utf);
     final result = json['status'];
-
-    print(result);
 
     if (result == 'ok') {
       itemData.clear();
