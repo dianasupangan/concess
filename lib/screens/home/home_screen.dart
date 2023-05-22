@@ -37,7 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Color.fromRGBO(113, 171, 126, 1.000),
                       ),
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.of(context)
+                            .popAndPushNamed(LogInScreen.routeName);
                       },
                     ),
                     title: Text(
@@ -71,6 +72,5 @@ class _HomeScreenState extends State<HomeScreen> {
             locationCode: concessUser.items.first.locationCode);
       },
     );
-    setState(() {});
   }
 }

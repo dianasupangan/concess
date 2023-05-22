@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 
 class ConcessItems {
@@ -37,7 +39,7 @@ class Items extends ChangeNotifier {
     String price,
   ) async {
     var target = items.firstWhere((item) => item.itemCode == itemCd);
-    if (target != null) {
+    if (!target.isNull) {
       target.retailPrice = price;
     }
 
