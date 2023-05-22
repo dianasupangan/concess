@@ -23,9 +23,6 @@ class _LogInFormState extends State<LogInForm> {
   Widget build(BuildContext context) {
     final userNameController = TextEditingController();
     final passwordController = TextEditingController();
-
-    bool isUsername = false;
-    bool isPassword = false;
     return Consumer<Concess>(
       builder: (context, concessUser, child) => Container(
         decoration: BoxDecoration(
