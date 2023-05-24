@@ -26,37 +26,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<Concess>(
-      builder: (context, concessUser, child) =>
-          concessUser.items.isEmpty == true
-              ? LogInScreen()
-              : Scaffold(
-                  appBar: AppBar(
-                    leading: GestureDetector(
-                      child: Icon(
-                        Icons.logout,
-                        color: Color.fromRGBO(113, 171, 126, 1.000),
-                      ),
-                      onTap: () {
-                        Navigator.of(context)
-                            .popAndPushNamed(LogInScreen.routeName);
-                      },
-                    ),
-                    title: Text(
-                      "Concession Items",
-                      style: TextStyle(
-                        color: Color.fromRGBO(113, 171, 126, 1.000),
-                      ),
-                    ),
-                  ),
-                  body: ItemCardList(),
-                  floatingActionButton: FloatingActionButton(
-                    backgroundColor: Color.fromRGBO(84, 148, 98, 1.000),
-                    onPressed: () {
-                      navigateToAdd(concessUser);
-                    },
-                    child: Icon(Icons.add),
-                  ),
-                ),
+      builder: (context, concessUser, child) => Scaffold(
+        appBar: AppBar(
+          leading: GestureDetector(
+            child: Icon(
+              Icons.logout,
+              color: Color.fromRGBO(113, 171, 126, 1.000),
+            ),
+            onTap: () {
+              Navigator.of(context).popAndPushNamed(LogInScreen.routeName);
+            },
+          ),
+          title: Text(
+            "Concession Items",
+            style: TextStyle(
+              color: Color.fromRGBO(113, 171, 126, 1.000),
+            ),
+          ),
+        ),
+        body: ItemCardList(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Color.fromRGBO(84, 148, 98, 1.000),
+          onPressed: () {
+            navigateToAdd(concessUser);
+          },
+          child: Icon(Icons.add),
+        ),
+      ),
     );
   }
 

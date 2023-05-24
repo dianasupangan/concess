@@ -56,7 +56,7 @@ class Items extends ChangeNotifier {
       add(
         result[i].itemCode,
         result[i].description,
-        result[1].retailPrice,
+        result[i].retailPrice,
       );
     }
 
