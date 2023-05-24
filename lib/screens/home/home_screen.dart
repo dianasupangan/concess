@@ -68,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
             locationCode: concessUser.items.first.locationCode);
       },
     );
-    showMyDialog('Item added');
   }
 
   Future<void> showMyDialog(String message) async {

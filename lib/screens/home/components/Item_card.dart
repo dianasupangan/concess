@@ -91,7 +91,6 @@ class _ItemCardState extends State<ItemCard> {
         );
       },
     );
-    showMyDialog("Item price updated");
   }
 
   void deleteByID(String itemCode, String description, String price,
